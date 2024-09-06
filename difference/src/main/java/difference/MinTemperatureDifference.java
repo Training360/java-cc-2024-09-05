@@ -3,6 +3,7 @@ package difference;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 public class MinTemperatureDifference {
 
@@ -60,16 +61,20 @@ public class MinTemperatureDifference {
         String[] parts = splitLineByWhiteSpaces(line);
         if (parts.length > MINIMUM_COLUMNS) {
             try {
-                int day =  getNumber(parts[0], REPLACE.NONE);
-                int maxTemperature =  getNumber(parts[1], REPLACE.SIGN);
-                int minTemperature = getNumber(parts[2], REPLACE.SIGN);
-                int difference = maxTemperature - minTemperature;
-                return new TemperatureDifferenceOnDay(day, difference);
+                return getTemperatureDifferenceOnDay(parts);
             } catch (NumberFormatException _) {
                 return new InvalidLine(line, "Not a number");
             }
         }
         return new InvalidLine(line, "Not enough column");
+    }
+
+    private static TemperatureDifferenceOnDay getTemperatureDifferenceOnDay(String[] parts) {
+        int day =  getNumber(parts[0], REPLACE.NONE);
+        int maxTemperature =  getNumber(parts[1], REPLACE.SIGN);
+        int minTemperature = getNumber(parts[2], REPLACE.SIGN);
+        int difference = maxTemperature - minTemperature;
+        return new TemperatureDifferenceOnDay(day, difference);
     }
 
     private static int getNumber(String part, REPLACE replace) {
