@@ -1,7 +1,5 @@
 package datamunging;
 
-import java.util.Arrays;
-
 public class FootballFileStrategy  implements FileStrategy {
 
     @Override

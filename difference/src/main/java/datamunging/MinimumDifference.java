@@ -57,7 +57,7 @@ public class MinimumDifference {
             }
             return Double.parseDouble(stringValue);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(String.format("%s nem konvertálható számmá!", stringValue));
+            throw new RuntimeException(String.format("%s nem konvertálható számmá!", stringValue), e);
         }
     }
 }
